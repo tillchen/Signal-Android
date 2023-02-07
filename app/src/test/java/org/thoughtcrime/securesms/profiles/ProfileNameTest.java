@@ -197,7 +197,7 @@ public final class ProfileNameTest {
   @Test
   public void givenProfileNameWithEmojiGivenNameAndEmojiFamilyName_whenIFromDataString_thenIExpectValidProfileName() {
     // GIVEN
-    String profileName = "🐴🐴🐴🐴🐴🐴\0🐴🐴";
+    String profileName = "\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\0\uD83D\uDC34\uD83D\uDC34";
 
     // WHEN
     ProfileName name = ProfileName.fromSerialized(profileName);
@@ -205,14 +205,14 @@ public final class ProfileNameTest {
     // THEN
     assertNotNull("ProfileName should be non-null", name);
     assertFalse("ProfileName should not be CJKV", name.isProfileNameCJKV());
-    assertEquals("ProfileName should have expected given name", "🐴🐴🐴🐴🐴🐴", name.getGivenName());
-    assertEquals("ProfileName should have empty family name", "🐴🐴", name.getFamilyName());
+    assertEquals("ProfileName should have expected given name", "\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34", name.getGivenName());
+    assertEquals("ProfileName should have empty family name", "\uD83D\uDC34\uD83D\uDC34", name.getFamilyName());
   }
 
   @Test
   public void givenProfileNameWithEnglishGivenNameAndEmojiFamilyName_whenIFromDataString_thenIExpectValidProfileName() {
     // GIVEN
-    String profileName = "Given\0🐴🐴";
+    String profileName = "Given\0\uD83D\uDC34\uD83D\uDC34";
 
     // WHEN
     ProfileName name = ProfileName.fromSerialized(profileName);
@@ -221,13 +221,13 @@ public final class ProfileNameTest {
     assertNotNull("ProfileName should be non-null", name);
     assertFalse("ProfileName should not be CJKV", name.isProfileNameCJKV());
     assertEquals("ProfileName should have expected given name", "Given", name.getGivenName());
-    assertEquals("ProfileName should have empty family name", "🐴🐴", name.getFamilyName());
+    assertEquals("ProfileName should have empty family name", "\uD83D\uDC34\uD83D\uDC34", name.getFamilyName());
   }
 
   @Test
   public void givenProfileNameWithEmojiGivenNameAndEnglishFamilyName_whenIFromDataString_thenIExpectValidProfileName() {
     // GIVEN
-    String profileName = "🐴🐴🐴🐴🐴🐴\0Family";
+    String profileName = "\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\0Family";
 
     // WHEN
     ProfileName name = ProfileName.fromSerialized(profileName);
@@ -235,14 +235,14 @@ public final class ProfileNameTest {
     // THEN
     assertNotNull("ProfileName should be non-null", name);
     assertFalse("ProfileName should not be CJKV", name.isProfileNameCJKV());
-    assertEquals("ProfileName should have expected given name", "🐴🐴🐴🐴🐴🐴", name.getGivenName());
+    assertEquals("ProfileName should have expected given name", "\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34", name.getGivenName());
     assertEquals("ProfileName should have empty family name", "Family", name.getFamilyName());
   }
 
   @Test
   public void givenProfileNameWithEmojiGivenNameAndCJKVFamilyName_whenIFromDataString_thenIExpectValidProfileName() {
     // GIVEN
-    String profileName = "🐴🐴🐴🐴🐴🐴\0姓";
+    String profileName = "\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\0姓";
 
     // WHEN
     ProfileName name = ProfileName.fromSerialized(profileName);
@@ -250,14 +250,14 @@ public final class ProfileNameTest {
     // THEN
     assertNotNull("ProfileName should be non-null", name);
     assertFalse("ProfileName should not be CJKV", name.isProfileNameCJKV());
-    assertEquals("ProfileName should have expected given name", "🐴🐴🐴🐴🐴🐴", name.getGivenName());
+    assertEquals("ProfileName should have expected given name", "\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34", name.getGivenName());
     assertEquals("ProfileName should have empty family name", "姓", name.getFamilyName());
   }
 
   @Test
   public void givenProfileNameWithCJKVGivenNameAndEmojiFamilyName_whenIFromDataString_thenIExpectValidProfileName() {
     // GIVEN
-    String profileName = "名\0🐴🐴";
+    String profileName = "名\0\uD83D\uDC34\uD83D\uDC34";
 
     // WHEN
     ProfileName name = ProfileName.fromSerialized(profileName);
@@ -266,7 +266,7 @@ public final class ProfileNameTest {
     assertNotNull("ProfileName should be non-null", name);
     assertFalse("ProfileName should not be CJKV", name.isProfileNameCJKV());
     assertEquals("ProfileName should have expected given name", "名", name.getGivenName());
-    assertEquals("ProfileName should have empty family name", "🐴🐴", name.getFamilyName());
+    assertEquals("ProfileName should have empty family name", "\uD83D\uDC34\uD83D\uDC34", name.getFamilyName());
   }
 
   @Test
