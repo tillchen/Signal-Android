@@ -193,4 +193,121 @@ public final class ProfileNameTest {
     assertEquals(name.getGivenName(), "Given");
     assertEquals(name.getFamilyName(), "Family");
   }
+
+  @Test
+  public void givenProfileNameWithEmojiGivenNameAndEmojiFamilyName_whenIFromDataString_thenIExpectValidProfileName() {
+    // GIVEN
+    String profileName = "\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\0\uD83D\uDC34\uD83D\uDC34";
+
+    // WHEN
+    ProfileName name = ProfileName.fromSerialized(profileName);
+
+    // THEN
+    assertNotNull("ProfileName should be non-null", name);
+    assertFalse("ProfileName should not be CJKV", name.isProfileNameCJKV());
+    assertEquals("ProfileName should have expected given name", "\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34", name.getGivenName());
+    assertEquals("ProfileName should have empty family name", "\uD83D\uDC34\uD83D\uDC34", name.getFamilyName());
+  }
+
+  @Test
+  public void givenProfileNameWithEnglishGivenNameAndEmojiFamilyName_whenIFromDataString_thenIExpectValidProfileName() {
+    // GIVEN
+    String profileName = "Given\0\uD83D\uDC34\uD83D\uDC34";
+
+    // WHEN
+    ProfileName name = ProfileName.fromSerialized(profileName);
+
+    // THEN
+    assertNotNull("ProfileName should be non-null", name);
+    assertFalse("ProfileName should not be CJKV", name.isProfileNameCJKV());
+    assertEquals("ProfileName should have expected given name", "Given", name.getGivenName());
+    assertEquals("ProfileName should have empty family name", "\uD83D\uDC34\uD83D\uDC34", name.getFamilyName());
+  }
+
+  @Test
+  public void givenProfileNameWithEmojiGivenNameAndEnglishFamilyName_whenIFromDataString_thenIExpectValidProfileName() {
+    // GIVEN
+    String profileName = "\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\0Family";
+
+    // WHEN
+    ProfileName name = ProfileName.fromSerialized(profileName);
+
+    // THEN
+    assertNotNull("ProfileName should be non-null", name);
+    assertFalse("ProfileName should not be CJKV", name.isProfileNameCJKV());
+    assertEquals("ProfileName should have expected given name", "\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34", name.getGivenName());
+    assertEquals("ProfileName should have empty family name", "Family", name.getFamilyName());
+  }
+
+  @Test
+  public void givenProfileNameWithEmojiGivenNameAndCJKVFamilyName_whenIFromDataString_thenIExpectValidProfileName() {
+    // GIVEN
+    String profileName = "\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\0姓";
+
+    // WHEN
+    ProfileName name = ProfileName.fromSerialized(profileName);
+
+    // THEN
+    assertNotNull("ProfileName should be non-null", name);
+    assertFalse("ProfileName should not be CJKV", name.isProfileNameCJKV());
+    assertEquals("ProfileName should have expected given name", "\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34", name.getGivenName());
+    assertEquals("ProfileName should have empty family name", "姓", name.getFamilyName());
+  }
+
+  @Test
+  public void givenProfileNameWithCJKVGivenNameAndEmojiFamilyName_whenIFromDataString_thenIExpectValidProfileName() {
+    // GIVEN
+    String profileName = "名\0\uD83D\uDC34\uD83D\uDC34";
+
+    // WHEN
+    ProfileName name = ProfileName.fromSerialized(profileName);
+
+    // THEN
+    assertNotNull("ProfileName should be non-null", name);
+    assertFalse("ProfileName should not be CJKV", name.isProfileNameCJKV());
+    assertEquals("ProfileName should have expected given name", "名", name.getGivenName());
+    assertEquals("ProfileName should have empty family name", "\uD83D\uDC34\uD83D\uDC34", name.getFamilyName());
+  }
+
+  @Test
+  public void fromParts_with_long_emoji_name_parts() {
+    ProfileName name = ProfileName.fromParts("\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34", "\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34");
+
+    assertEquals("\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34", name.getGivenName());
+    assertEquals("\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34\uD83D\uDC34", name.getFamilyName());
+  }
+
+
+  @Test
+  public void fromParts_with_long_CJKV_name_parts() {
+    ProfileName name = ProfileName.fromParts("名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名", "名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名");
+
+    assertEquals("名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名", name.getGivenName());
+    assertEquals("名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名", name.getFamilyName());
+  }
+
+  @Test
+  public void fromParts_with_single_english_name_parts() {
+    ProfileName name = ProfileName.fromParts("G", "F");
+
+    assertEquals("G", name.getGivenName());
+    assertEquals("F", name.getFamilyName());
+  }
+
+  @Test
+  public void fromParts_with_single_emoji_name_parts() {
+    ProfileName name = ProfileName.fromParts("🐴", "🐴");
+
+    assertEquals("🐴", name.getGivenName());
+    assertEquals("🐴", name.getFamilyName());
+  }
+
+  @Test
+  public void fromParts_with_single_CJKV_name_parts() {
+    ProfileName name = ProfileName.fromParts("名", "姓");
+
+    assertEquals("名", name.getGivenName());
+    assertEquals("姓", name.getFamilyName());
+  }
+
 }
