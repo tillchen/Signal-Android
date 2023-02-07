@@ -286,4 +286,28 @@ public final class ProfileNameTest {
     assertEquals("名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名名", name.getFamilyName());
   }
 
+  @Test
+  public void fromParts_with_single_english_name_parts() {
+    ProfileName name = ProfileName.fromParts("G", "F");
+
+    assertEquals("G", name.getGivenName());
+    assertEquals("F", name.getFamilyName());
+  }
+
+  @Test
+  public void fromParts_with_single_emoji_name_parts() {
+    ProfileName name = ProfileName.fromParts("🐴", "🐴");
+
+    assertEquals("🐴", name.getGivenName());
+    assertEquals("🐴", name.getFamilyName());
+  }
+
+  @Test
+  public void fromParts_with_single_CJKV_name_parts() {
+    ProfileName name = ProfileName.fromParts("名", "姓");
+
+    assertEquals("名", name.getGivenName());
+    assertEquals("姓", name.getFamilyName());
+  }
+
 }
