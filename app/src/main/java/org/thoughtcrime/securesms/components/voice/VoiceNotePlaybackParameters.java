@@ -11,7 +11,7 @@ public final class VoiceNotePlaybackParameters {
 
   private final MediaSessionCompat mediaSessionCompat;
 
-  VoiceNotePlaybackParameters(@NonNull MediaSessionCompat mediaSessionCompat) {
+  public VoiceNotePlaybackParameters(@NonNull MediaSessionCompat mediaSessionCompat) {
     this.mediaSessionCompat = mediaSessionCompat;
   }
 
