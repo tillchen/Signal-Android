@@ -11,7 +11,7 @@ apply plugin: 'app.cash.exhaustive'
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'com.squareup.wire'
 apply from: 'static-ips.gradle'
-
+apply from: "$project.rootDir/jacoco.gradle"
 
 repositories {
     maven {
