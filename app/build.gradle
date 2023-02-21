@@ -11,7 +11,7 @@ apply plugin: 'app.cash.exhaustive'
 apply plugin: 'kotlin-parcelize'
 apply plugin: 'com.squareup.wire'
 apply from: 'static-ips.gradle'
-
+apply plugin: 'jacoco'
 
 repositories {
     maven {
@@ -294,6 +294,7 @@ android {
             manifestPlaceholders = [mapsKey:getMapsKey()]
 
             buildConfigField "String", "BUILD_VARIANT_TYPE", "\"Debug\""
+            testCoverageEnabled true
         }
 
         instrumentation {
