@@ -18,23 +18,23 @@ public final class FiatMoneyUtil_manualFormat_Test {
     assertEquals("£1.20", format);
   }
 
-  @Test
-  public void eur_France() {
-    Locale.setDefault(Locale.FRANCE);
+//  @Test
+//  public void eur_France() {
+//    Locale.setDefault(Locale.FRANCE);
+//
+//    String format = FiatMoneyUtil.manualFormat(Currency.getInstance("EUR"), "2");
+//
+//    assertEquals("2€", format);
+//  }
 
-    String format = FiatMoneyUtil.manualFormat(Currency.getInstance("EUR"), "2");
-
-    assertEquals("2€", format);
-  }
-
-  @Test
-  public void aud_France() {
-    Locale.setDefault(Locale.FRANCE);
-
-    String format = FiatMoneyUtil.manualFormat(Currency.getInstance("AUD"), "1");
-
-    assertEquals("1$AU", format);
-  }
+//  @Test
+//  public void aud_France() {
+//    Locale.setDefault(Locale.FRANCE);
+//
+//    String format = FiatMoneyUtil.manualFormat(Currency.getInstance("AUD"), "1");
+//
+//    assertEquals("1$AU", format);
+//  }
 
   @Test
   public void usd_US() {

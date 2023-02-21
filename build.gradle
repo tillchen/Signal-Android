@@ -31,6 +31,7 @@ buildscript {
             exclude group: 'com.squareup.wire', module: 'wire-grpc-server-generator'
             exclude group: 'io.outfoxx', module: 'swiftpoet'
         }
+        classpath "org.jacoco:org.jacoco.core:0.8.8"
     }
 }
 
@@ -54,6 +55,7 @@ allprojects {
         mavenCentral()
         mavenLocal()
     }
+    apply plugin: 'jacoco'
 }
 
 subprojects {
