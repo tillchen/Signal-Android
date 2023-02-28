@@ -1,5 +1,11 @@
 name: SWE261Part4
-on: [push, pull_request]
+on: 
+  pull_request:
+  push:
+    branches:
+    - 'main'
+    - 'feature/part4'
+    
 permissions:
   contents: read
 jobs:
@@ -31,3 +37,5 @@ jobs:
       with:
         name: reports
         path: '*/build/reports'
+    - name: Run unit tests
+      run: ./gradlew testPlayProdDebugUnitTest
