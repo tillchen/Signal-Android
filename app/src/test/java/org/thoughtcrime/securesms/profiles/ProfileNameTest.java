@@ -310,4 +310,15 @@ public final class ProfileNameTest {
     assertEquals("姓", name.getFamilyName());
   }
 
+  @Test
+  public void testGetJoinedName() {
+    assertEquals("", ProfileName.getJoinedNameForTesting("", ""));
+    assertEquals("Walter", ProfileName.getJoinedNameForTesting("Walter", ""));
+    assertEquals("White", ProfileName.getJoinedNameForTesting("", "White"));
+    assertEquals("Walter White", ProfileName.getJoinedNameForTesting("Walter", "White"));
+    assertEquals("华特", ProfileName.getJoinedNameForTesting("华特", ""));
+    assertEquals("白", ProfileName.getJoinedNameForTesting("", "白"));
+    assertEquals("白 华特", ProfileName.getJoinedNameForTesting("华特", "白"));
+  }
+
 }
