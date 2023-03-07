@@ -125,6 +125,18 @@ public final class ProfileName implements Parcelable {
                                                                           familyName);
   }
 
+  public static @NonNull String getJoinedNameForTesting(@NonNull String givenName, @NonNull String familyName) {
+    if (givenName.isEmpty() && familyName.isEmpty()) return "";
+    else if (givenName.isEmpty())                    return familyName;
+    else if (familyName.isEmpty())                   return givenName;
+    else if (isCJKV(givenName, familyName))          return String.format("%s %s",
+                                                                          familyName,
+                                                                          givenName);
+    else                                             return String.format("%s %s",
+                                                                          givenName,
+                                                                          familyName);
+  }
+
   private static boolean isCJKV(@NonNull String givenName, @NonNull String familyName) {
     if (givenName.isEmpty() && familyName.isEmpty()) {
       return false;
