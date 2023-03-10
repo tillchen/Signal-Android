@@ -12,6 +12,18 @@ apply plugin: 'kotlin-parcelize'
 apply plugin: 'com.squareup.wire'
 apply from: 'static-ips.gradle'
 apply plugin: 'jacoco'
+apply plugin: 'checkstyle'
+
+task checkstyle(type: Checkstyle) {
+    description 'Check code standard'
+    group 'verification'
+    configFile file('tools/checkstyle.xml')
+    source 'src'
+    include '**/*.kt'
+    exclude '**/gen/**'
+    classpath = files()
+    ignoreFailures = false
+}
 
 repositories {
     maven {
