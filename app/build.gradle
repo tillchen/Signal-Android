@@ -13,6 +13,8 @@ apply plugin: 'com.squareup.wire'
 apply from: 'static-ips.gradle'
 apply plugin: 'jacoco'
 apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+
 
 task checkstyle(type: Checkstyle) {
     description 'Check code standard'
@@ -23,6 +25,17 @@ task checkstyle(type: Checkstyle) {
     exclude '**/gen/**'
     classpath = files()
     ignoreFailures = false
+}
+
+task pmd(type: Pmd) {
+    description 'Identifying potential problems mainly dead code, duplicated code, cyclomatic complexity and overcomplicated expressions'
+    group 'verification'
+    ruleSetFiles = files("tools/rules-pmd.xml")
+    source = fileTree('src/main/java')
+    include '**/*.java'
+    exclude '**/gen/**'
+
+
 }
 
 repositories {
