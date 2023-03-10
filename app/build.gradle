@@ -21,7 +21,7 @@ task checkstyle(type: Checkstyle) {
     group 'verification'
     configFile file('tools/checkstyle.xml')
     source 'src'
-    include '**/*.kt'
+    include '**/*.java'
     exclude '**/gen/**'
     classpath = files()
     ignoreFailures = false
