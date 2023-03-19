@@ -92,30 +92,6 @@ public class UtilTest {
   @Test
   public void getRandom() {
     List<Integer> test = new ArrayList<>();
-
-    assertEquals(-450.0, Util.halfOffsetFromScale(100, 10.0F), 0.000001);
-
-    assertEquals(12333, Util.toIntExact(12333));
-    @Nullable Long first = Long.valueOf(10000);
-    long second = 1000;
-
-    assertEquals(false, Util.isEquals(first, second));
-
-    assertEquals("123 B", Util.getPrettyFileSize(123));
-    byte[] byteArray = {0x01, 0x02, 0x03, 0x04, 0x05};
-    byte[] byteArray2 = {0x01, 0x02, 0x03, 0x04, 0x05};
-
-    assertArrayEquals(new byte[]{0x01, 0x02, 0x03, 0x04, 0x05, 0x01, 0x02, 0x03, 0x04, 0x05}, Util.combine(byteArray, byteArray2));
-
-    assertArrayEquals(new byte[]{0x01, 0x02, 0x03}, Util.trim(byteArray, 3));
-
-    assertArrayEquals(new byte[][]{{0x01}, {0x02}}, Util.split(byteArray, 1, 1));
-    @NonNull List<Integer> test3 = new ArrayList<>();
-    test3.add(1);
-    @NonNull List<Integer> test4 = new ArrayList<>();
-    test4.add(2);
-
-    assertEquals(new ArrayList<>(Arrays.asList(1, 2)), Util.join(test3, test4));
     test.add(1);
     test.add(2);
     test.add(3);
@@ -123,4 +99,52 @@ public class UtilTest {
 
   }
 
+  @Test
+  public void testForHalfOffsetFromScale() {
+    assertEquals(-450.0, Util.halfOffsetFromScale(100, 10.0F), 0.000001);
+  }
+
+  @Test
+  public void isEqual() {
+    @Nullable Long first = Long.valueOf(10000);
+    long second = 1000;
+    assertEquals(false, Util.isEquals(first, second));
+    assertEquals(12333, Util.toIntExact(12333));
+  }
+
+  @Test
+  public void testGetPrettyFileSize() {
+    assertEquals("123 B", Util.getPrettyFileSize(123));  }
+
+  @Test
+  public void testCombine() {
+    byte[] byteArray  = { 0x01, 0x02, 0x03, 0x04, 0x05 };
+    byte[] byteArray2 = { 0x01, 0x02, 0x03, 0x04, 0x05 };
+    assertArrayEquals(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x01, 0x02, 0x03, 0x04, 0x05 }, Util.combine(byteArray, byteArray2));
+  }
+
+  @Test
+  public void testTrim() {
+    byte[] byteArray  = { 0x01, 0x02, 0x03, 0x04, 0x05 };
+    assertArrayEquals(new byte[]{0x01, 0x02, 0x03}, Util.trim(byteArray, 3));
+  }
+
+  @Test
+  public void testSplit() {
+    byte[] byteArray  = { 0x01, 0x02, 0x03, 0x04, 0x05 };
+    assertArrayEquals(new byte[][]{{0x01}, {0x02}}, Util.split(byteArray, 1, 1));
+  }
+
+  @Test
+  public void testJoin() {
+    @NonNull List<Integer> test3 = new ArrayList<>();
+    test3.add(1);
+    @NonNull List<Integer> test4 = new ArrayList<>();
+    test4.add(2);
+
+    assertEquals(new ArrayList<>(Arrays.asList(1, 2)), Util.join(test3, test4));
+  }
 }
+
+
+
